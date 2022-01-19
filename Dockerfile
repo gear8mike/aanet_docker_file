@@ -2,8 +2,8 @@ FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update -y
-RUN apt-get install wget python3-pip git -y 
+RUN apt-get update -y && \
+    apt-get install wget python3-pip git -y 
 
 RUN pip3 install --no-cache --upgrade pip && \
     pip install --no-cache notebook jupyterlab
@@ -33,11 +33,8 @@ COPY aanet-master.tar.gz .
 RUN tar -xvf aanet-master.tar.gz && \
     rm -rf aanet-master.tar.gz
 
-#RUN git clone --recursive git@git.km3net.de:common/aanet && \
-
 #RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-RUN cd aanet-master/
-RUN ["/bin/bash", "-c", "source /aanet-master/setenv.sh && ./aanet-master/make.py"]
+RUN cd aanet-master && \
+    ["/bin/bash", "-c", "source /aanet-master/setenv.sh && ./aanet-master/make.py"]
+#RUN ["/bin/bash", "-c", "source /aanet-master/setenv.sh"]
 #RUN ["/bin/bash", "-c", "./aanet-master/make.py"]
-    #./make.py
-#RUN
