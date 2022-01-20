@@ -32,9 +32,10 @@ ENV PYTHONPATH="${ROOTSYS}/lib:${PYTHONPATH}"
 COPY aanet-master.tar.gz .
 RUN tar -xvf aanet-master.tar.gz && \
     rm -rf aanet-master.tar.gz
+ENV AADIR="/aanet-master"
 
 #RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-RUN cd aanet-master && \
-    ["/bin/bash", "-c", "source /aanet-master/setenv.sh && ./aanet-master/make.py"]
+#RUN cd aanet-master && \
+    #["/bin/bash", "-c", "source ./setenv.sh"]
 #RUN ["/bin/bash", "-c", "source /aanet-master/setenv.sh"]
-#RUN ["/bin/bash", "-c", "./aanet-master/make.py"]
+RUN ["/bin/bash", "-c", "./aanet-master/make.py -j1"]
